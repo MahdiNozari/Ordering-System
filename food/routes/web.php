@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
@@ -54,4 +55,8 @@ Route::prefix('cart')->middleware('auth')->group(function(){
     Route::get('/remove',[CartController::class,'remove'])->name('cart.remove');
     Route::get('/clear',[CartController::class,'clear'])->name('cart.clear');
     Route::get('/check-coupon',[CartController::class,'checkCoupon'])->name('cart.checkcoupon');
+});
+
+Route::prefix('payments')->middleware('auth')->group(function(){
+    Route::post('/send',[PaymentController::class,'send'])->name('payment.send');
 });

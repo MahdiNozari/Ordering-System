@@ -6,12 +6,14 @@ use Carbon\Carbon;
 use App\Models\Coupon;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function index(Request $request){
+
         $cart = $request->session()->get('cart');
-        
+        $addresses = Auth::user()->addresses;
 
         if ($cart == null){
             return view('cart.index',compact('cart'));
@@ -23,7 +25,7 @@ class CartController extends Controller
             $cart_total_price += $price * $item['qty'];
         }
 
-        return view('cart.index',compact('cart','cart_total_price'));
+        return view('cart.index',compact('cart','cart_total_price','addresses'));
     }
 
     public function add(Request $request){
