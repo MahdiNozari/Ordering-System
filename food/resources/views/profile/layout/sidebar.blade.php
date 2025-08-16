@@ -7,10 +7,10 @@
                             <a href="{{ route('profile.address') }}">آدرس ها</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="./orders.html">سفارشات</a>
+                            <a href="{{ route('profile.order') }}">سفارشات</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="./transactions.html">تراکنش ها</a>
+                            <a href="{{ route('profile.transaction') }}">تراکنش ها</a>
                         </li>
                         <li class="list-group-item">
                             <a href="{{ route('profile.wishlist') }}">لیست علاقه مندی ها</a>

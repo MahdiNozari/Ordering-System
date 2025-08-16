@@ -9,7 +9,7 @@
                     <i class="bi bi-basket-fill" style="font-size:80px"></i>
                 </div>
                 <h4 class="text-bold">سبد خرید شما خالی است</h4>
-                <a href="{{ route('product.menu') }}" class="btn btn-outline-dark mt-3">
+                <a href="{{ route('products.menu') }}" class="btn btn-outline-dark mt-3">
                     مشاهده محصولات
                 </a>
             </div>
@@ -145,7 +145,7 @@
 
                                             @php
                                                 $coupnPrice = 0;
-                                                if (request()->session()->has('coupon')) {
+                                                if (request()->session()->get('coupon') != []) {
                                                     $coupon = request()->session()->get('coupon');
                                                     $couponCode = $coupon['code'];
                                                     $couponPercent = $coupon['percentage'];

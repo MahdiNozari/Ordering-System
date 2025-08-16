@@ -43,6 +43,8 @@ Route::prefix('profile')->middleware('auth')->group(function(){
     Route::get('add-to-wishlist',[ProfileController::class,'addToWishlist'])->name('profile.addtowishlist');
     Route::get('wishlist',[ProfileController::class,'wishlist'])->name('profile.wishlist');
     Route::get('remove-from-wishlist',[ProfileController::class,'removeFromWishlist'])->name('profile.wishlist.remove');
+    Route::get('orders',[ProfileController::class,'orders'])->name('profile.order');
+    Route::get('transactions',[ProfileController::class,'transactions'])->name('profile.transaction');
 });
 
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
@@ -59,4 +61,6 @@ Route::prefix('cart')->middleware('auth')->group(function(){
 
 Route::prefix('payments')->middleware('auth')->group(function(){
     Route::post('/send',[PaymentController::class,'send'])->name('payment.send');
+    Route::get('/verify',[PaymentController::class,'verify'])->name('payments.verify');
+    Route::get('/status',[PaymentController::class,'status'])->name('payments.status');
 });

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->foreignId('address_id')->constrained()->onDelete('cascade');
             $table->foreignId('coupon_id')->constrained()->nullable()->onDelete('cascade');
             $table->tinyInteger('status')->default(0);
-            $table->unsignedInteger('total_amoumt');
-            $table->unsignedInteger('coupon_amoumt')->default(0);
-            $table->unsignedInteger('paying_amoumt');
+            $table->unsignedInteger('total_amount');
+            $table->unsignedInteger('coupon_amount')->default(0);
+            $table->unsignedInteger('paying_amount');
             $table->tinyInteger('payment_status')->default(0);
             $table->softDeletes();
 

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+
 
 class CartController extends Controller
 {
@@ -152,17 +155,21 @@ class CartController extends Controller
 
     public function checkCoupon(Request $request){
         $request->validate([
-            'code' => ['required','string']
+            'code' => ['nullable','string']
         ]);
 
         $coupon = Coupon::where('code',$request->code)->where('expired_at','>',Carbon::now())->first();
-
+        
         if($coupon == null){
             return redirect()->route('cart.index')->withErrors(['code' => 'کد تخفیف وارد شده صحیح نیست']);
         }
+        
+        if(Order::where('user_id',Auth::id())->where('coupon_id',$coupon->id)->where('status',1)->exists()){
+             return redirect()->route('cart.index')->withErrors(['code'=>'کد تخفیف وارد شده قبلا استفاده شده']);
+        }
 
         $request->session()->put('coupon',['code' => $coupon->code, 'percentage' => $coupon->percentage]);
-
+        
         return redirect()->route('cart.index');
     }
 }

@@ -127,4 +127,14 @@ class ProfileController extends Controller
         $wishlist->delete();
         return redirect()->back()->with('success','محصول با موفقیت از علاقه مندی ها حذف شد');
     }
+
+    public function orders(){
+        $orders = Auth::user()->order()->orderByDesc('created_at')->with(['address','orderitems'])->paginate(5);
+        return view('profile.order',compact('orders'));
+    }
+
+    public function transactions(){
+        $transactions = Auth::user()->transactions()->orderByDesc('created_at')->paginate(5);
+        return view('profile.transactions',compact('transactions'));
+    }
 }

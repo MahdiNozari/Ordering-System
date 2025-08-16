@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $guarded = [];
     protected $appends =['is_sale'];
 
     public function getIsSaleAttribute(){
@@ -35,7 +36,15 @@ class Product extends Model
                     $query->orderBy('price');
                     break;
                 case 'bestseller':
-                    $query;
+                    $orders = Order::where('payment_status',1)->with('products')->get();
+                    $productid=[];
+
+                    foreach($orders as $order){
+                        foreach($order->products as $product){
+                            array_push($productid,$product->id);
+                        }
+                    }
+                    $query->wherein('id',array_keys((array_count_values($productid))));
                     break;
                 case 'sale':
                     $query->where('sale_price','!=',null)->where('sale_price','!=',0)->where('date_on_sale_from','<',Carbon::now())->where('date_on_sale_to','>',Carbon::now());
