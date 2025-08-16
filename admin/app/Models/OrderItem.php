@@ -9,4 +9,8 @@ class OrderItem extends Model
 {
     use SoftDeletes;
     protected $guarded=[];
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 }

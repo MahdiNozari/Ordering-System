@@ -96,3 +96,7 @@ function shmasitomiladi($date){
 function miladitoshamsi($date){
     return verta($date)->format('Y/m/j H:i:s');
 }
+
+function ImageUrl($image){
+    return env('ADMIN_PANEL_URL') . env('PRODUCT_IMAGES_PATH') . $image;
+}

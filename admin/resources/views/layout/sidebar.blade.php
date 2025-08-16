@@ -2,14 +2,14 @@
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link  {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="index.html">
+                            <a class="nav-link  {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">
                                 <i class="bi bi-grid me-2"></i>
                                 داشبورد
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                                 <i class="bi bi-people me-2"></i>
                                 کاربران
                             </a>
@@ -27,19 +27,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link {{ request()->is('orders*') ? 'active' : '' }}" href="{{ route('order.index') }}">
                                 <i class="bi bi-basket me-2"></i>
                                 سفارشات
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link {{ request()->is('transactions*') ? 'active' : '' }}" href="{{ route('transaction.index') }}">
                                 <i class="bi bi-currency-dollar me-2"></i>
                                 تراکنش ها
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('coupons.index') }}">
+                            <a class="nav-link {{ request()->is('coupons*') ? 'active' : '' }}" href="{{ route('coupons.index') }}">
                                 <i class="bi bi-percent me-2"></i>
                                 تخفیف ها
                             </a>

@@ -109,43 +109,44 @@
 
 
             // Set data
-            var data = [{
-                month: "فروردین",
-                value: 2025
-            }, {
-                month: "اردیبهشت",
-                value: 1882
-            }, {
-                month: "خرداد",
-                value: 1809
-            }, {
-                month: "تیر",
-                value: 1722
-            }, {
-                month: "مرداد",
-                value: 1522
-            }, {
-                month: "شهریور",
-                value: 1414
-            }, {
-                month: "مهر",
-                value: 1120
-            }, {
-                month: "آبان",
-                value: 998
-            }, {
-                month: "آذر",
-                value: 875
-            }, {
-                month: "دی",
-                value: 789
-            }, {
-                month: "بهمن",
-                value: 658
-            }, {
-                month: "اسنفد",
-                value: 598
-            }];
+            var data = @json($data);
+            // [{
+            //     month: "فروردین",
+            //     value: 2025
+            // }, {
+            //     month: "اردیبهشت",
+            //     value: 1882
+            // }, {
+            //     month: "خرداد",
+            //     value: 1809
+            // }, {
+            //     month: "تیر",
+            //     value: 1722
+            // }, {
+            //     month: "مرداد",
+            //     value: 1522
+            // }, {
+            //     month: "شهریور",
+            //     value: 1414
+            // }, {
+            //     month: "مهر",
+            //     value: 1120
+            // }, {
+            //     month: "آبان",
+            //     value: 998
+            // }, {
+            //     month: "آذر",
+            //     value: 875
+            // }, {
+            //     month: "دی",
+            //     value: 789
+            // }, {
+            //     month: "بهمن",
+            //     value: 658
+            // }, {
+            //     month: "اسنفد",
+            //     value: 598
+            // }];
 
             xAxis.data.setAll(data);
             series.data.setAll(data);
