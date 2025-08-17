@@ -14,6 +14,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TransactionController;
 
 Route::middleware('auth')->group(function(){
@@ -35,17 +36,18 @@ Route::middleware('auth')->group(function(){
         Route::put('/{footer}',[FooterController::class,'update'])->name('footer.update');
     });
 
-    Route::resource('category',CategoryController::class);
+    Route::resource('category',CategoryController::class)->middleware('can:admin');
 
-    Route::resource('products',ProductController::class);
-
+    Route::resource('products',ProductController::class)->middleware('can:admin');
     Route::resource('coupons',CouponController::class);
 
     Route::get('/orders',[OrderController::class,'index'])->name('order.index');
     Route::get('/transactions',[TransactionController::class,'index'])->name('transaction.index');
 
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class)->middleware('can:admin');
     Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
+    
+    Route::resource('roles',RoleController::class);
 });
 
 

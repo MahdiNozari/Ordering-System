@@ -47,6 +47,23 @@
             </div>
         </div>
 
+        <div class="col-md-3">
+            <label class="form-label">نقش ها</label>
+            <select name="role_ids[]" multiple class="form-select">
+                @php
+                    $userRoleIds = $user->roles()->pluck('id')->toarray();
+                @endphp
+                @foreach ($roles as $role)
+                    <option {{ in_array($role->id, $userRoleIds) ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
+                @endforeach
+            </select>
+            <div class="form-text text-danger">
+                @error('role_ids')
+                    {{ $message }}
+                @enderror
+            </div>
+        </div>
+
 
         <div>
             <button type="submit" class="btn btn-outline-dark mt-3">

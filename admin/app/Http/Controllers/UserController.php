@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -13,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->get();
+        $users = User::latest()->with('roles')->get();
         return view('user.index',compact('users'));
     }
 
@@ -22,7 +24,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $roles = Role::all();
+        return view('user.create',compact('roles'));
     }
 
     /**
@@ -34,16 +37,24 @@ class UserController extends Controller
             'name' =>['required','string'],
             'phone' => ['required','regex:/^09[0|1|2|3][0-9]{8}$/','unique:users,phone'],
             'email' => ['required','email','unique:users,email'],
-            'password' => ['required','min:5']
+            'password' => ['required','min:5'],
+            'role_ids' => ['required'],
+            'role_ids.*' => ['required','exists:roles,id']
         ]);
 
-        User::create([
+        DB::beginTransaction();
+
+        $user=User::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
             'password' => $request->password
 
         ]);
+
+        $user->roles()->attach($request->role_ids);
+
+        DB::commit();
 
         return redirect()->route('users.index')->with('success','کاربر با موفقیت ایجاد شد');
     }
@@ -61,7 +72,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit',compact('user'));
+        $roles = Role::all();
+        return view('user.edit',compact('user','roles'));
     }
 
     /**
@@ -73,16 +85,19 @@ class UserController extends Controller
             'name' =>['required','string'],
             'phone' => ['required','regex:/^09[0|1|2|3][0-9]{8}$/','unique:users,phone,'.$user->id],
             'email' => ['required','email','unique:users,email,'.$user->id],
-            'password' => ['required','min:5']
+            'password' => ['nullable','min:5'],
+            'role_ids' => ['required'],
+            'role_ids.*' => ['required','exists:roles,id']
         ]);
 
         $user->update([
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
-            'password' => $request->has('password') ? Hash::make($request->password) : $user->password
+            'password' => $request->password !==null ? Hash::make($request->password) : $user->password
 
         ]);
+        $user->roles()->sync($request->role_ids);
 
         return redirect()->route('users.index')->with('success','کاربر با موفقیت ویرایش  شد');
     }
@@ -92,6 +107,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user -> delete();
+        return redirect()->route('users.index')->with('success','کاربر با موفقیت حذف  شد');
     }
 }
