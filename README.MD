@@ -2,7 +2,7 @@
 
 A **Laravel-based food ordering platform** consisting of two applications:
 
-- **Admin Panel (`admin/`)** – Manage restaurants, menus, orders, and users.  
+- **Admin Panel (`admin/`)** – Manage  menus, orders, and users.  
 - **Customer App (`food/`)** – Customers can browse food, place orders, and track status.  
 
 ---
@@ -32,13 +32,12 @@ A **Laravel-based food ordering platform** consisting of two applications:
 Clone the project and set up both apps:
 
 ```bash
-git clone https://github.com/yourusername/ordering-system.git
+git clone https://github.com/MahdiNozari/Ordering-System.git
 cd "Ordering System"
 
 1️⃣ Setup Admin Panel
 
 cd admin
-cp .env.example .env
 composer install
 php artisan key:generate
 npm install && npm run dev
@@ -50,7 +49,6 @@ Admin available at:
 2️⃣ Setup Customer App
 
 cd ../food
-cp .env.example .env
 composer install
 php artisan key:generate
 npm install && npm run dev
@@ -68,11 +66,11 @@ APP_ENV=local
 APP_KEY=base64:...
 APP_URL=http://localhost:8000
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=ordering
-DB_USERNAME=root
+DB_CONNECTION=
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
 DB_PASSWORD=
 
 🧪 Running Tests
