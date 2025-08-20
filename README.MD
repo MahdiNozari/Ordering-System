@@ -13,8 +13,7 @@ A **Laravel-based food ordering platform** consisting of two applications:
 - 📦 Menu & category management  
 - 🛒 Cart and checkout  
 - 💳 Order placement & tracking  
-- 📊 Admin dashboard with order analytics  
-- 🌐 RESTful API endpoints  
+- 📊 Admin dashboard with order analytics   
 
 ---
 
@@ -22,7 +21,7 @@ A **Laravel-based food ordering platform** consisting of two applications:
 
 - **PHP** >= 8.1  
 - **Composer** >= 2.x  
-- **Laravel** 10+  
+- **Laravel** 12 
 - **Node.js & NPM**  
 - **MySQL / MariaDB**  
 
